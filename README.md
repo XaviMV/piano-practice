@@ -21,6 +21,6 @@ When the correct note is played it lights up in green and plays its sound
 ![image](https://github.com/XaviMV/piano-practice/assets/70759474/01a948b0-8300-4f4b-83a9-3924b3eb7a99)
 
 
-# Improvemetns
+# Improvements
 
 Every time a key in the piano lights up in green or red it only does so for 1 single frame, so sometimes it is difficult to see. It could be changed so that the period during which it changes color increases (to maybe 0.5 or 0.25 seconds). It could also progressively lose its red/green color, so that after being pressed it becomes a saturated red/green and progressively goes back to being black/white.
