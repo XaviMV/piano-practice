@@ -1,5 +1,9 @@
 # How to use it
 
+Execute game.py.
+
+It needs opencv-python, pygame and numpy. Other libraries should already be installed with python
+
 When the game is opened three notes will appear, below them a piano will also appear. The notes need to be played on the piano, if a wrong note is played it will light up in red, if the correct one is played it will light up in green and play its respective sound. The music sheet is read from left to right, and when a correct note is played it goes on to the next one. When all the notes on the current sheet are played a new random music sheet will be generated and the process repeats itself.
 
 # Example
