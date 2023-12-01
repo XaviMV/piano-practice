@@ -5,27 +5,36 @@ import pygame
 from pygame import mixer
 import os
 
+import time as t
+
 from funcs import nota_random
 
 def dibuixar_tecles(screen, blanques_clicades, negres_clicades):
 
-    # dibuixar tecles blanques
-    for i in range(7):
-    	color = (255,255,255)
+	notes_globals = ["do", "re", "mi", "fa", "sol", "la", "si"]
 
-    	if blanques_clicades[i] == 1:
-    		color = (255,0,0)
-    	elif blanques_clicades[i] == 2:
-    		color = (0,255,0)
-    	pygame.draw.rect(screen, color, (362+i*80,475,75,200))
+    # dibuixar tecles blanques
+	for i in range(7):
+		color = (255,255,255)
+
+		if blanques_clicades[i] == 1:
+			color = (255,0,0)
+		elif blanques_clicades[i] == 2:
+			color = (0,255,0)
+		pygame.draw.rect(screen, color, (362+i*80,475,75,200))
+
+		myfont = pygame.font.SysFont("monospace", 30)
+		# render text
+		label = myfont.render(notes_globals[i], 10, (255,255,0))
+		screen.blit(label, (362+i*80+15, 700))
 	
     # dibuixar tecles negres
-    for i in range(6):
-    	color = (0,0,0)
-    	if i != 2:
-    		if negres_clicades[i]:
-    			color = (255,0,0)
-    		pygame.draw.rect(screen, color, (362+55+i*80,475,45,125))
+	for i in range(6):
+		color = (0,0,0)
+		if i != 2:
+			if negres_clicades[i]:
+				color = (255,0,0)
+			pygame.draw.rect(screen, color, (362+55+i*80,475,45,125))
 
 
 def detect_click(nota, events):
@@ -77,7 +86,7 @@ def fitxer_audio_nota(nota): # nota es un numero string que representa la nota
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+screen = pygame.display.set_mode((1280, 750))
 clock = pygame.time.Clock()
 running = True
 
@@ -120,6 +129,7 @@ while running:
 
 	# update
 	pygame.display.update()
-	clock.tick(20)  # limits FPS to 20
+
+	clock.tick(10)  # limits FPS to 20
 
 pygame.quit()
