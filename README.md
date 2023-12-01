@@ -23,8 +23,6 @@ When the correct note is played it lights up in green and plays its sound
 
 # Improvemetns
 
-Right now flat and sharp notes are not implemented (the black keys in the piano)
-
 Every music sheet has exactly 3 notes every time, this could be changed to have a variable amount
 
 Every time a key in the piano lights up in green or red it only does so for 1 single frame, so sometimes it is difficult to see. It could be changed so that the period during which it changes color increases (to maybe 0.5 or 0.25 seconds). It could also progressively lose its red/green color, so that after being pressed it becomes a saturated red/green and progressively goes back to being black/white.
