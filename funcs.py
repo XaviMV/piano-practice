@@ -4,6 +4,8 @@ import numpy as np
 
 
 
+# FER QUE PUGUI FER SUSTINGUTS I BAMOLLS (sharp i falt)
+
 def nota_random(): # retorna una imatge amb 3 notes random i un string dient quines notes son
 
 	notes_globals = ["do", "re", "mi", "fa", "sol", "la", "si"]
@@ -22,7 +24,7 @@ def nota_random(): # retorna una imatge amb 3 notes random i un string dient qui
 
 	notes_imatge = []
 
-	for i in range(3):
+	for i in range(3): # dibuixar les 3 notes
 		rand_num = random.randint(0, len(notes_globals)-1)
 
 		x_ini = 150 + i*200
@@ -31,7 +33,18 @@ def nota_random(): # retorna una imatge amb 3 notes random i un string dient qui
 		if rand_num == 6: # si la nota es DO cal dibuixar una linia
 			cv2.line(img, (x_ini-25,150+rand_num*25), (x_ini+25,150+rand_num*25), (0,0,0), 3)
 
-		notes_imatge.append(notes_globals[rand_num])
+		nota = notes_globals[rand_num]
+
+		rand_num_2 = random.randint(0, 5)
+		if rand_num_2 == 0 and nota != "mi" and nota != "si": # sostingut
+			img = cv2.putText(img, "#", (x_ini-65, 165+rand_num*25), cv2.FONT_HERSHEY_TRIPLEX, 2, (0,0,0), 2, cv2.LINE_AA)
+			nota += "+"
+
+		elif rand_num_2 == 1 and nota != "fa" and nota != "do": # bemoll
+			img = cv2.putText(img, "b", (x_ini-65, 165+rand_num*25), cv2.FONT_HERSHEY_TRIPLEX, 2, (0,0,0), 2, cv2.LINE_AA)
+			nota += "-"
+
+		notes_imatge.append(nota)
 
 
 	return img, notes_imatge

@@ -11,7 +11,7 @@ from funcs import nota_random
 
 def dibuixar_tecles(screen, blanques_clicades, negres_clicades):
 
-	notes_globals = ["do", "re", "mi", "fa", "sol", "la", "si"]
+	notes_blanques_globals = ["do", "re", "mi", "fa", "sol", "la", "si"]
 
     # dibuixar tecles blanques
 	for i in range(7):
@@ -25,15 +25,17 @@ def dibuixar_tecles(screen, blanques_clicades, negres_clicades):
 
 		myfont = pygame.font.SysFont("monospace", 30)
 		# render text
-		label = myfont.render(notes_globals[i], 10, (255,255,0))
+		label = myfont.render(notes_blanques_globals[i], 10, (255,255,0))
 		screen.blit(label, (362+i*80+15, 700))
 	
     # dibuixar tecles negres
 	for i in range(6):
 		color = (0,0,0)
 		if i != 2:
-			if negres_clicades[i]:
+			if negres_clicades[i] == 1:
 				color = (255,0,0)
+			elif negres_clicades[i] == 2:
+				color = (0,255,0)
 			pygame.draw.rect(screen, color, (362+55+i*80,475,45,125))
 
 
@@ -41,7 +43,17 @@ def detect_click(nota, events):
 	negres_clicades = [0,0,0,0,0,0] # el tercer element (comencant desde l'1) no representa ninguna tecla
 	blanques_clicades = [0,0,0,0,0,0,0]
 
-	notes_globals = ["do", "re", "mi", "fa", "sol", "la", "si"]
+	if nota == "mi+" or nota == "fa-" or nota == "si+" or nota == "do-":
+		print("ERROR: " + nota + " no hauria d'existir")
+
+	notes_blanques_globals = ["do", "re", "mi", "fa", "sol", "la", "si"]
+	notes_negres_globals = ["do+", "re+", "", "fa+", "sol+", "la+"]
+
+	if "-" in nota: # si es bamoll la passem al equivalent en sostingut. En teoria un do bemoll no es possible per tant no existeix la possibilitat d'accedir al element -1
+		for i in range(len(notes_blanques_globals)):
+			if notes_blanques_globals[i] in nota:
+				nota = notes_blanques_globals[i-1]+'+'
+
 
 	estat = ""
 
@@ -58,15 +70,20 @@ def detect_click(nota, events):
 			continue
 
 		if clicat and x > 362+55+i*80 and x < 362+55+i*80+45 and y > 475 and y < 475+125:
-			negres_clicades[i] = 1
-			estat = "error"
+			if notes_negres_globals[i] == nota:
+				negres_clicades[i] = 2
+				estat = "correcte"
+
+			else:
+				negres_clicades[i] = 1
+				estat = "error"
 
 	for i in range(7):
 		if any(negres_clicades): # si alguna tecla negra ha sigut clicada passem de mirar les blanques
 			continue
 
 		if clicat and x > 362+i*80 and x < 362+i*80 + 75 and y > 475 and y < 475+200:
-			if notes_globals[i] == nota:
+			if notes_blanques_globals[i] == nota:
 				blanques_clicades[i] = 2
 				estat = "correcte"
 			else:
@@ -75,10 +92,10 @@ def detect_click(nota, events):
 
 	return blanques_clicades, negres_clicades, estat
 
-def fitxer_audio_nota(nota): # nota es un numero string que representa la nota
+def fitxer_audio_nota(nota): # retorna el path al fitxer de audio de la nota. La variable "nota" es un string
 
 	for a in os.listdir(os.path.join(os.getcwd(), "audio")):
-		if nota in a.lower():
+		if nota+"." in a.lower():
 			return os.path.join("audio", a) 
 
 	return -1
