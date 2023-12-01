@@ -6,7 +6,7 @@ import numpy as np
 
 # FER QUE PUGUI FER SUSTINGUTS I BAMOLLS (sharp i falt)
 
-def nota_random(): # retorna una imatge amb 3 notes random i un string dient quines notes son
+def nota_random(num_notes): # retorna una imatge amb 3 notes random i un string dient quines notes son
 
 	notes_globals = ["do", "re", "mi", "fa", "sol", "la", "si"]
 
@@ -24,10 +24,11 @@ def nota_random(): # retorna una imatge amb 3 notes random i un string dient qui
 
 	notes_imatge = []
 
-	for i in range(3): # dibuixar les 3 notes
+
+	for i in range(num_notes): # dibuixar les 3 notes
 		rand_num = random.randint(0, len(notes_globals)-1)
 
-		x_ini = 150 + i*200
+		x_ini = 50 + int(650/(num_notes+1)) + i*int(650/(num_notes+1))
 
 		cv2.ellipse(img, (x_ini,150+rand_num*25), (20, 15), 0, 0, 360, (0,0,0), -1)
 		if rand_num == 6: # si la nota es DO cal dibuixar una linia
@@ -52,24 +53,26 @@ def nota_random(): # retorna una imatge amb 3 notes random i un string dient qui
 
 def posar_nota(image, notes): # posa la nota a una imatge amb la nota donada
 
-	for i in range(len(notes)):
+	num_notes = len(notes)
+
+	for i in range(num_notes):
 
 		n = notes[i]
 
-		# font 
+		# font
 		font = cv2.FONT_HERSHEY_SIMPLEX 
 		  
-		# org 
-		org = (120+i*200, 375) 
+		# org
+		org = (25 + int(650/(num_notes+1)) + i*int(650/(num_notes+1)), 375) 
 		  
 		# fontScale 
-		fontScale = 2
+		fontScale = 1
 		   
 		# Black color in BGR 
 		color = (0, 0, 0) 
 		  
 		# Line thickness of 2 px 
-		thickness = 3
+		thickness = 2
 		   
 		# Using cv2.putText() method 
 		image = cv2.putText(image, n, org, font, fontScale, color, thickness, cv2.LINE_AA)
@@ -80,7 +83,7 @@ def posar_nota(image, notes): # posa la nota a una imatge amb la nota donada
 
 while False:
 
-	img, notes = nota_random()
+	img, notes = nota_random(4)
 
 	cv2.imshow("nota", img)
 	key = cv2.waitKey(0)

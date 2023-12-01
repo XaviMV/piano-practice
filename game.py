@@ -113,12 +113,14 @@ nota_actual = 0
 while running:
 
 	if all(notes_encertades):
-		img, notes = nota_random()
+		img, notes = nota_random(4) # el valor que li entra es el nombre de notes que sortiran per cada partitura
 		img = cv2.flip(img, 1)
 		img = np.rot90(img)
 		img = pygame.surfarray.make_surface(img)
 		
-		notes_encertades = [0,0,0]
+		notes_encertades = []
+		for i in range(len(notes)):
+			notes_encertades.append(0)
 		nota_actual = 0
 
 	# mirar events
