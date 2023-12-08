@@ -107,7 +107,7 @@ screen = pygame.display.set_mode((1280, 750))
 clock = pygame.time.Clock()
 running = True
 
-notes_encertades = [1,1,1]
+notes_encertades = [1]
 notes = []
 nota_actual = 0
 while running:

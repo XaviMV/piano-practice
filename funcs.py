@@ -81,7 +81,7 @@ def posar_nota(image, notes): # posa la nota a una imatge amb la nota donada
 
 
 
-while False:
+while False: # set to True and execute if you want to practise the names of each note. Leave as False if you want to practise playing the notes on the piano
 
 	img, notes = nota_random(4)
 
