@@ -4,22 +4,11 @@ Execute game.py.
 
 It needs opencv-python, pygame and numpy. Other libraries should already be installed with python
 
-When the game is opened three notes will appear, below them a piano will also appear. The notes need to be played on the piano, if a wrong note is played it will light up in red, if the correct one is played it will light up in green and play its respective sound. The music sheet is read from left to right, and when a correct note is played it goes on to the next one. When all the notes on the current sheet are played a new random music sheet will be generated and the process repeats itself.
+Four notes will appear when the game is opened, and a piano will also appear under them. The notes need to be played on the piano, if a wrong note is played, its respective key will light up in red, if the correct one is played it will light up in green and play its sound. The music sheet is read from left to right, and when a correct note is played it goes on to the next one. When all the notes on the current sheet are played a new random set of notes will appear on the music sheet.
 
 # Example
 
-With this following example, the note that needs to be played is the first one strating from the left.
-
-![image](https://github.com/XaviMV/piano-practice/assets/70759474/3e6fc40f-d1b3-444b-80fe-abfea58f0eb7)
-
-When the incorrect note is played, it lights up in red
-
-![image](https://github.com/XaviMV/piano-practice/assets/70759474/872b0f5b-7ce9-4681-a6f0-c77988bda69b)
-
-When the correct note is played it lights up in green and plays its sound
-
-![image](https://github.com/XaviMV/piano-practice/assets/70759474/01a948b0-8300-4f4b-83a9-3924b3eb7a99)
-
+https://github.com/XaviMV/piano-practice/assets/70759474/ebdf8509-1dab-4760-8320-41f0d690bd3b
 
 # Improvements
 
